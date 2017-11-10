@@ -12,4 +12,6 @@ In Terminal
   
 Don't forget to add the AL folder in the header search path  
   
-/usr/local/Cellar/freealut/1.1.0/include
+/usr/local/Cellar/freealut/1.1.0/include  
+  
+The #ifdef guard should flag up if ALUT has not been included
