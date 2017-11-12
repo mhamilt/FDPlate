@@ -1,7 +1,10 @@
 # FD_Plate
 C++ Finite difference plate
-  
-Values inbetween the Edit Here banners can be changed  
+
+All code tested with Xcode Version 8.2.1 (8C1002)  
+4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.42.1)
+
+Values inbetween the 'Edit Here' banners can be changed  
   
 If running executable from command line, the first arguement is the output file name.
   
