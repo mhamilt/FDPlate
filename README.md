@@ -1,6 +1,10 @@
 # FD_Plate
 C++ Finite difference plate
 
+This code illustrates a very basic finidt difference plate scheme.  
+Code has been left explicit to make it easier to follow while audio read-in and playback  
+functions have been included in the AudioOut.h file.
+  
 All code tested with Xcode Version 8.2.1 (8C1002)  
 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.42.1)
 
