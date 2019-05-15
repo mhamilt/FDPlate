@@ -25,21 +25,21 @@ var outtype = true; // output type: 0: displacement, 1: velocity
 //----------------------------------------------------------------------------
 
 // simulation
-var Tf = 2; // duration
+var Tf = 1/2200; // duration
 var nu = .5; // Poisson Ratios (< .5)
-var ctr[2] = {
+var ctr = [
   .45,
   .45
-}; // centre povar of excitation as percentage
+]; // centre povar of excitation as percentage
 var wid = .25; // width (m)
 var u0 = 0;
 var v0 = 1; // excitation displacement and velocity
-var rp[4] = {
+var rp = [
   .45,
   .65,
   .85,
   .15
-}; // readout position as percentage on grid.
+]; // readout position as percentage on grid.
 
 //----------------------------------------------------------------------------
 // Physical parameters
@@ -54,12 +54,12 @@ var rho = 480; // density (kg/m^3)
 var H = .005; // thickness (m)
 var Lx = 1; // x-axis plate length (m)
 var Ly = 1; // y-axis plate length (m)
-var loss[4] = {
+var loss = [
   100,
   8,
   1000,
-  1
-}; // loss [freq.(Hz), T60;...]
+  1]
+; // loss [freq.(Hz), T60;...]
 
 // I/O
 var OSR = 1; // Oversampling ratio
@@ -174,28 +174,28 @@ var C01 = -(2 * sigma1 * k / Math.pow(h, 2)) * A00;
 //----------------------------------------------------------------------------
 // Print Scheme Info
 //----------------------------------------------------------------------------
-console.Math.log("--- Coefficient Info --- \n\n");
-console.Math.log("Loss A		: %.4fm \n", A00);
-console.Math.log("Centre B    : %.4fm \n", B00);
-console.Math.log("1-Grid B    : %.4fm \n", B01);
-console.Math.log("2-Grid B	: %.4fm \n", B02);
-console.Math.log("Diagonal B  : %.4fm \n", B11);
-console.Math.log("Centre C	: %.4fm \n", C00);
-console.Math.log("1-Grid C    : %.4fm \n", C01);
-console.Math.log("Side Bound	: %.4fm \n", BC1);
-console.Math.log("Cornr Bound : %.4fm \n", BC2);
+console.log("--- Coefficient Info --- \n\n");
+console.log("Loss A		: %.4fm \n", A00);
+console.log("Centre B    : %.4fm \n", B00);
+console.log("1-Grid B    : %.4fm \n", B01);
+console.log("2-Grid B	: %.4fm \n", B02);
+console.log("Diagonal B  : %.4fm \n", B11);
+console.log("Centre C	: %.4fm \n", C00);
+console.log("1-Grid C    : %.4fm \n", C01);
+console.log("Side Bound	: %.4fm \n", BC1);
+console.log("Cornr Bound : %.4fm \n", BC2);
 
-console.Math.log("\n--- Scheme Info --- \n\n");
-console.Math.log("Size		: %.1fm2 \n", Nx * h * Ny * h);
-console.Math.log("Grid X-Ax   : %d \n", Nx);
-console.Math.log("Grid Y-Ax   : %d \n", Ny);
-console.Math.log("Total P		: %d \n", ss);
-console.Math.log("Dur(samps)	: %d \n", Nf);
-console.Math.log("In_cell		: %d\n", li);
-console.Math.log("Out_cell	: %d\n", lo);
-console.Math.log("Youngs		: %.2e\n", E);
-console.Math.log("Sigma 0		: %f\n", sigma0);
-console.Math.log("Sigma 1		: %f\n", sigma1);
+console.log("\n--- Scheme Info --- \n\n");
+console.log("Size		: %.1fm2 \n", Nx * h * Ny * h);
+console.log("Grid X-Ax   : %d \n", Nx);
+console.log("Grid Y-Ax   : %d \n", Ny);
+console.log("Total P		: %d \n", ss);
+console.log("Dur(samps)	: %d \n", Nf);
+console.log("In_cell		: %d\n", li);
+console.log("Out_cell	: %d\n", lo);
+console.log("Youngs		: %.2e\n", E);
+console.log("Sigma 0		: %f\n", sigma0);
+console.log("Sigma 1		: %f\n", sigma1);
 
 //----------------------------------------------------------------------------
 // Main Loop
