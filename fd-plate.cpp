@@ -138,16 +138,11 @@ int main(int argc, const char *argv[])
 	//----------------------------------------------------------------------------
 	// Allocate Memory
 	//----------------------------------------------------------------------------
-
-	double uDATA[ss], u1DATA[ss], u2DATA[ss], out[Nf];
-	double * u = uDATA, * u1 = u1DATA, * u2 = u2DATA;
+	double *u   = new double[ss];
+	double *u1  = new double[ss];
+	double *u2  = new double[ss];
+	double *out = new double[Nf];
 	double *dummy_ptr;
-
-	memset(uDATA, 0, ss * sizeof(double));
-	memset(u1DATA, 0, ss * sizeof(double));
-	memset(u2DATA, 0, ss * sizeof(double));
-	memset(out, 0, Nf * sizeof(double));
-
 
 	//----------------------------------------------------------------------------
 	// Read In/Out
