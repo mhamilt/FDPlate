@@ -121,19 +121,16 @@ int main(int argc, const char *argv[])
 	//----------------------------------------------------------------------------
 	// Grid Spacing
 	//----------------------------------------------------------------------------
-
 	double k = 1/SR;          // time step
+	double hmin = (sqrt(4*k*(sigma1+sqrt(pow(sigma1,2)+pow(kappa,2))))); // stability condition
 
-	// stability condition
-	double hmin = (sqrt(4*k*(sigma1+sqrt(pow(sigma1,2)+pow(kappa,2)))));
-
-	int Nx = floor(Lx/hmin);      // number of segments x-axis
-	int Ny = floor(Ly/hmin);      // number of segments y-axis
-	double h = sqrt(Lx*Ly/(Nx*Ny));;     // adjusted grid spacing x/y
-	Nx = Nx+1; Ny = Ny+1;       // grid point number x and y
-	double mu = (kappa * k)/pow(h,2);     // scheme parameter
-	int Nf = floor(SR*Tf);        // number of time steps
-	int ss = Nx*Ny;           // total grid size.
+	int Nx = floor(Lx/hmin);         // number of segments x-axis
+	int Ny = floor(Ly/hmin);         // number of segments y-axis
+	double h = sqrt(Lx*Ly/(Nx*Ny));; // adjusted grid spacing x/y
+	Nx = Nx+1; Ny = Ny+1;            // grid point number x and y
+	double mu = (kappa * k)/pow(h,2);// scheme parameter
+	int Nf = floor(SR*Tf);           // number of time steps
+	int ss = Nx*Ny;                  // total grid size.
 
 	//----------------------------------------------------------------------------
 	// Allocate Memory
