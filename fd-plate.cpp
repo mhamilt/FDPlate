@@ -67,10 +67,10 @@ int main(int argc, const char *argv[])
 	//----------------------------------------------------------------------------
 
 	// simulation
-	double Tf = 2;            // duration
+	double Tf = 1;            // duration (seconds)
 	double nu = .5;           // Poisson Ratios (< .5)
 	double ctr [2]=
-	{.45, .45};           // centre point of excitation as percentage
+	{.45, .45};               // centre point of excitation as percentage
 	double wid = .25;         // width (m)
 	double u0 = 0; double v0 = 1;     // excitation displacement and velocity
 	double rp [4] =
@@ -86,7 +86,7 @@ int main(int argc, const char *argv[])
 	//	E = 2e11;							// Young's modulus
 	//	rho = 7850;							// density (kg/m^3)
 
-	double H = .005;          // thickness (m)
+	double H = .03;          // thickness (m)
 	double Lx = 1;            // x-axis plate length (m)
 	double Ly = 1;            // y-axis plate length (m)
 	double loss [4] =

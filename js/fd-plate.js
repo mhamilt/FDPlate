@@ -5,8 +5,7 @@
 let pi = 3.14159265358979323846;
 //==============================================================================
 // Quick Signum Function used in the initial force
-function signum(d)
-{
+function signum(d) {
   return (d <= 0) ? 0 : 1;
 }
 //==============================================================================
@@ -25,7 +24,7 @@ var outtype = true; // output type: 0: displacement, 1: velocity
 //----------------------------------------------------------------------------
 
 // simulation
-var Tf = 1/2200; // duration
+var Tf = 1 / 2200; // duration
 var nu = .5; // Poisson Ratios (< .5)
 var ctr = [
   .45,
@@ -58,8 +57,8 @@ var loss = [
   100,
   8,
   1000,
-  1]
-; // loss [freq.(Hz), T60;...]
+  1
+]; // loss [freq.(Hz), T60;...]
 
 // I/O
 var OSR = 1; // Oversampling ratio
@@ -113,6 +112,14 @@ var u1 = new Array(ss);
 var u2 = new Array(ss);
 var out = new Array(Nf);
 
+for(var i = 0; i < ss; i++)
+{
+  u[i]= 0;
+  u1[i]= 0;
+  u2[i]= 0;
+
+}
+
 //----------------------------------------------------------------------------
 // Read In/Out
 //----------------------------------------------------------------------------
@@ -123,12 +130,10 @@ var lo = (Ny * (((rp[1] * Nx) - 1))) + (rp[0] * Ny) - 1;
 // Excitation Force
 //----------------------------------------------------------------------------
 // raised Math.cosine in 2D
-for (var xi = 1; xi < Nx - 1; xi++)
-{
+for (var xi = 1; xi < Nx - 1; xi++) {
   var X = xi * h;
 
-  for (var yi = 1; yi < Ny - 1; yi++)
-  {
+  for (var yi = 1; yi < Ny - 1; yi++) {
     var cp = yi + (xi * Ny);
     var Y = yi * h;
     var dist = Math.sqrt(Math.pow(X - (ctr[0] * Lx), 2) + Math.pow(Y - (ctr[1] * Ly), 2));
@@ -156,13 +161,10 @@ var B02 = (-Math.pow(mu, 2) * 1) * A00; // 2-off
 // Boundary Coefficients
 var BC1, BC2;
 
-if (bctype)
-{
+if (bctype) {
   BC1 = (-Math.pow(mu, 2) * 21 + (2 * sigma1 * k / Math.pow(h, 2)) * -4 + 2) * A00; // Side
   BC2 = (-Math.pow(mu, 2) * 22 + (2 * sigma1 * k / Math.pow(h, 2)) * -4 + 2) * A00; // Corner
-}
-else
-{
+} else {
   BC1 = (-Math.pow(mu, 2) * 19 + (2 * sigma1 * k / Math.pow(h, 2)) * -4 + 2) * A00; // Side
   BC2 = (-Math.pow(mu, 2) * 18 + (2 * sigma1 * k / Math.pow(h, 2)) * -4 + 2) * A00; // Corner
 }
@@ -174,39 +176,37 @@ var C01 = -(2 * sigma1 * k / Math.pow(h, 2)) * A00;
 //----------------------------------------------------------------------------
 // Print Scheme Info
 //----------------------------------------------------------------------------
-console.log("--- Coefficient Info --- \n\n");
-console.log("Loss A		: %.4fm \n", A00);
-console.log("Centre B    : %.4fm \n", B00);
-console.log("1-Grid B    : %.4fm \n", B01);
-console.log("2-Grid B	: %.4fm \n", B02);
-console.log("Diagonal B  : %.4fm \n", B11);
-console.log("Centre C	: %.4fm \n", C00);
-console.log("1-Grid C    : %.4fm \n", C01);
-console.log("Side Bound	: %.4fm \n", BC1);
-console.log("Cornr Bound : %.4fm \n", BC2);
+function printvars() {
+  console.log("--- Coefficient Info --- \n\n");
+  console.log("Loss A		: %.4fm \n", A00);
+  console.log("Centre B    : %.4fm \n", B00);
+  console.log("1-Grid B    : %.4fm \n", B01);
+  console.log("2-Grid B	: %.4fm \n", B02);
+  console.log("Diagonal B  : %.4fm \n", B11);
+  console.log("Centre C	: %.4fm \n", C00);
+  console.log("1-Grid C    : %.4fm \n", C01);
+  console.log("Side Bound	: %.4fm \n", BC1);
+  console.log("Cornr Bound : %.4fm \n", BC2);
 
-console.log("\n--- Scheme Info --- \n\n");
-console.log("Size		: %.1fm2 \n", Nx * h * Ny * h);
-console.log("Grid X-Ax   : %d \n", Nx);
-console.log("Grid Y-Ax   : %d \n", Ny);
-console.log("Total P		: %d \n", ss);
-console.log("Dur(samps)	: %d \n", Nf);
-console.log("In_cell		: %d\n", li);
-console.log("Out_cell	: %d\n", lo);
-console.log("Youngs		: %.2e\n", E);
-console.log("Sigma 0		: %f\n", sigma0);
-console.log("Sigma 1		: %f\n", sigma1);
-
+  console.log("\n--- Scheme Info --- \n\n");
+  console.log("Size		: %.1fm2 \n", Nx * h * Ny * h);
+  console.log("Grid X-Ax   : %d \n", Nx);
+  console.log("Grid Y-Ax   : %d \n", Ny);
+  console.log("Total P		: %d \n", ss);
+  console.log("Dur(samps)	: %d \n", Nf);
+  console.log("In_cell		: %d\n", li);
+  console.log("Out_cell	: %d\n", lo);
+  console.log("Youngs		: %.2e\n", E);
+  console.log("Sigma 0		: %f\n", sigma0);
+  console.log("Sigma 1		: %f\n", sigma1);
+}
 //----------------------------------------------------------------------------
 // Main Loop
 //----------------------------------------------------------------------------
 
-for (var n = 0; n < Nf; n++)
-{
-  for (var xi = 2; xi < Nx - 2; ++xi)
-  {
-    for (var yi = 2; yi < Ny - 2; ++yi)
-    {
+function fd_update() {
+  for (var xi = 2; xi < Nx - 2; ++xi) {
+    for (var yi = 2; yi < Ny - 2; ++yi) {
       var cp = (yi) + ((xi) * Ny); // current povar
 
       u[cp] = B00 * u1[cp] +
@@ -221,8 +221,7 @@ for (var n = 0; n < Nf; n++)
   // Update Side Boundaries
   //X-Axis
 
-  for (var xi = 2; xi < Nx - 2; ++xi)
-  {
+  for (var xi = 2; xi < Nx - 2; ++xi) {
     //North
 
     var cp = 1 + (xi * Ny); // current povar
@@ -248,8 +247,7 @@ for (var n = 0; n < Nf; n++)
 
   // Y-Axis
 
-  for (var yi = 2; yi < Ny - 2; ++yi)
-  {
+  for (var yi = 2; yi < Ny - 2; ++yi) {
     //West
 
     var cp = yi + Ny; // current povar
@@ -307,10 +305,11 @@ for (var n = 0; n < Nf; n++)
       C01 * (u2[cp - 1] + u2[cp + 1] + u2[cp - Ny] + u2[cp + Ny]);
   }
 
-  out[n] = (outtype) ? SR * (u[lo] - u1[lo]) : u[lo];
+  // out[n] = (outtype) ? SR * (u[lo] - u1[lo]) : u[lo];
 
   var dummy_ptr = u2;
   u2 = u1;
   u1 = u;
   u = dummy_ptr; // swap povarers
+
 }
