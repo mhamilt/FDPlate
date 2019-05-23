@@ -2,7 +2,7 @@
 
 **by Matthew Hamilton (2017)**
 
-C++ Finite Difference Kirschoff Thin Plate Model
+C++ Finite Difference Thin Plate Model
 
 ***
 
