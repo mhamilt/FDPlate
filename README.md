@@ -1,16 +1,5 @@
-<head>
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
-    </script>
-  </head>
-
 # FD_Plate
-C++ Finite difference plate
-
-  
-  <p>
-          $$\ddot{u} = -\kappa^{2}\Delta\Delta u, \quad \kappa = \sqrt{\frac{E H^2}{12\rho(1- \nu)} }$$
-        </p>
-        
+C++ Finite difference plate        
 
 This code illustrates a very basic finidt difference plate scheme.  
 Code has been left explicit to make it easier to follow while audio read-in and playback  
