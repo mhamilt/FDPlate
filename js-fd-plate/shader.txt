@@ -1,0 +1,12 @@
+#ifdef GL_ES
+precision mediump float; // set precision level if available
+#endif
+
+
+out vec4 outColor;
+in vec3 theColor;
+
+void main()
+{
+  outColor = vec4(0.0,1.0,0.0,0.0);
+}
