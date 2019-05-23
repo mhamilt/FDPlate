@@ -20,16 +20,14 @@ varying vec3 var_vertNormal;
 varying vec2 var_vertTexCoord;
 varying vec4 v_color;
 //==============================================================================
-// functions
-vec3 getPixelColour(vec2 pos)
-{
-    float dis = distance(pos, vec2(0.0)); // distance from centre
-    return vec3(sin(twoPi * dis * time / 2.0), 0.2, sin(dis));
-}
-//==============================================================================
+
+const float maxz = 1.0/50.0;
 void main( void )
 {
-    vec2 pos = ((gl_FragCoord.xy / resolution.xy) * 2.0) - 1.0; // scale screen co-ordinates to -1 < (x, y) < 1
-    pos.x *= resolution.x / resolution.y;
-    gl_FragColor = vec4(var_vertPos.z/100.0,0.0,0.0,1.0);
+    float color = var_vertPos.z*maxz;
+    gl_FragColor = vec4(
+    clamp(0.55 * color,0.,1.) + clamp(0.7*-color,0.,1.) + 0.17,
+    clamp(0.35 * color,0.,1.) + clamp(0.2*-color,0.,1.) + 0.17,
+    clamp(0.25 * color,0.,1.) + clamp(0.7*-color,0.,1.) + 0.11,
+    1.0);
 }

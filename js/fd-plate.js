@@ -50,14 +50,14 @@ var rho = 480; // density (kg/m^3)
 //	E = 2e11;							// Young's modulus
 //	rho = 7850;							// density (kg/m^3)
 
-var H = .005; // thickness (m)
+var H = .003; // thickness (m)
 var Lx = 1; // x-axis plate length (m)
 var Ly = 1; // y-axis plate length (m)
 var loss = [
   100,
   8,
   1000,
-  1
+  7
 ]; // loss [freq.(Hz), T60;...]
 
 // I/O
@@ -117,7 +117,7 @@ for(var i = 0; i < ss; i++)
   u[i]= 0;
   u1[i]= 0;
   u2[i]= 0;
-
+  
 }
 
 //----------------------------------------------------------------------------

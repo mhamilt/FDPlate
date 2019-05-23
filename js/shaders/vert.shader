@@ -49,7 +49,7 @@ uniform bool uUseLighting;
 uniform sampler2D uSampler;
 uniform bool isTexture;
 
-// General
+// general
 uniform float uResolution;
 uniform float uPointSize;
 //------------------------------------------------------------------------------
@@ -63,11 +63,10 @@ varying vec4 v_color;
 void main()
 {
   gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aPosition, 1.0);
-
+  v_color = gl_Position * 0.5 + 0.5;
   // Pass through to frag shader
   var_vertPos      = aPosition;
   var_vertCol      = aVertexColor;
   var_vertNormal   = aNormal;
   var_vertTexCoord = aTexCoord;
-  v_color = (gl_Position*0.5) +0.5; // equivalent to var_vertPos
 }

@@ -1,33 +1,69 @@
-//https://github.com/processing/p5.js/blob/master/developer_docs/webgl_mode_architecture.md
-
 let pg;
-var program;
-preload = function()
-{
-  program = loadShader('js/shaders/vert.shader', 'js/shaders/frag.shader');
+var shdr;
+let zscl = 150000.0;
+preload = function() {
+  shdr = loadShader('js/shaders/vert.shader', 'js/shaders/frag.shader');
 };
 
-function setup()
-{
-  createCanvas(400, 400, WEBGL);
-  gl = canvas.getContext('webgl');
-  pg = createGraphics(400, 400);
+function setup() {
+  var canvas = createCanvas(400, 400, WEBGL);
+  frameRate(30);
+  // gl = canvas.getContext('webgl');
+  canvas.parent('jumbo-canvas');
+  pg = createGraphics(200, 200);
   pg.textSize(75);
-  pg.background(0, 0);
+  pg.background(0, 100);
+  fill(255);
   texture(pg);
-  shader(program);
+  shader(shdr);
+  console.log(u[0]);
 }
 
-function draw()
+
+function draw() {
+  drawPlate();
+}
+
+
+function drawPlate() {
+
+  for  (var i = 0; i < 10; ++i)
+  {
+  fd_update();
+  }
+  background(0);
+  var scale = width / (Nx - 1);
+  push();
+  translate(0,0,-200);
+  rotateX(PI / 3);
+  rotateZ(millis()*0.0002);
+
+  // rotateY(millis() /1000);
+  translate(-width / 2, -height / 2, 0);
+  for (var yi = 0; yi < Ny; ++yi) {
+    beginShape(TRIANGLE_STRIP);
+    for (var xi = 0; xi < Nx; ++xi) {
+      var cp = (xi) + ((yi) * Nx); // current povar
+      vertex(xi * scale, yi * scale, Math.floor(u[cp] * zscl));
+      vertex(xi * scale, (yi + 1) * scale, Math.floor(u[cp + Ny] * zscl));
+    }
+    endShape()
+  }
+
+  pop();
+}
+
+function mousePressed() {
+  console.log(u[Nx/2 + Ny/2*Nx] * zscl);
+
+  var point = Math.floor(((Nx-1)*mouseY/height) + ((Ny-1) * Nx * mouseX/width))
+  console.log(point);
+  u1[point] += 0.0001;
+}
+
+function mouseDragged()
 {
-  background(255);
-  beginShape(TRIANGLE_STRIP);
-  vertex(30, 75, 0);
-  vertex(40, 20,100);
-  vertex(50, 75,0);
-  vertex(60, 20,0);
-  vertex(70, 75,0);
-  vertex(80, 20,0);
-  vertex(200, 75,0);
-  endShape();
+  var point = Math.floor(((Nx-1)*mouseY/height) + ((Ny-1) * Nx * mouseX/width))
+
+  u1[point] += 0.00002;
 }
