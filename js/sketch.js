@@ -1,4 +1,4 @@
-var screensize = 3 * ($(window).height() < $(window).width() ? $(window).height() : $(window).width()) / 5;
+var screensize = (4 * $(window).width()) / 5;
 
 let pg;
 var shdr;
