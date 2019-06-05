@@ -22,3 +22,7 @@ p {
 canvas {
     display: block;
 }
+
+.MathJax {
+font-size: 1em; !important;
+}
