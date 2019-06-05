@@ -13,7 +13,7 @@ function setup()
   var canvas = createCanvas(screensize, screensize, WEBGL);
   frameRate(30);
   // gl = canvas.getContext('webgl');
-  canvas.parent('jumbo-canvas');
+  canvas.parent('sketch-holder');
   pg = createGraphics(200, 200);
   pg.textSize(75);
   pg.background(0, 100);
