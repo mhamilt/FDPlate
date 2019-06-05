@@ -1,12 +1,16 @@
+var screensize = 3 * ($(window).height() < $(window).width() ? $(window).height() : $(window).width()) / 5;
+
 let pg;
 var shdr;
 let zscl = 150000.0;
-preload = function() {
+preload = function()
+{
   shdr = loadShader('js/shaders/vert.shader', 'js/shaders/frag.shader');
 };
 
-function setup() {
-  var canvas = createCanvas(400, 400, WEBGL);
+function setup()
+{
+  var canvas = createCanvas(screensize, screensize, WEBGL);
   frameRate(30);
   // gl = canvas.getContext('webgl');
   canvas.parent('jumbo-canvas');
@@ -20,29 +24,32 @@ function setup() {
 }
 
 
-function draw() {
+function draw()
+{
   drawPlate();
 }
 
 
-function drawPlate() {
-
-  for  (var i = 0; i < 10; ++i)
+function drawPlate()
+{
+  for (var i = 0; i < 10; ++i)
   {
-  fd_update();
+    fd_update();
   }
   background(0);
   var scale = width / (Nx - 1);
   push();
-  translate(0,0,-200);
+  translate(0, 0, -200);
   rotateX(PI / 3);
-  rotateZ(millis()*0.0002);
+  rotateZ(millis() * 0.0002);
 
   // rotateY(millis() /1000);
   translate(-width / 2, -height / 2, 0);
-  for (var yi = 0; yi < Ny; ++yi) {
+  for (var yi = 0; yi < Ny; ++yi)
+  {
     beginShape(TRIANGLE_STRIP);
-    for (var xi = 0; xi < Nx; ++xi) {
+    for (var xi = 0; xi < Nx; ++xi)
+    {
       var cp = (xi) + ((yi) * Nx); // current povar
       vertex(xi * scale, yi * scale, Math.floor(u[cp] * zscl));
       vertex(xi * scale, (yi + 1) * scale, Math.floor(u[cp + Ny] * zscl));
@@ -53,17 +60,18 @@ function drawPlate() {
   pop();
 }
 
-function mousePressed() {
-  console.log(u[Nx/2 + Ny/2*Nx] * zscl);
+function mousePressed()
+{
+  console.log(u[Nx / 2 + Ny / 2 * Nx] * zscl);
 
-  var point = Math.floor(((Nx-1)*mouseY/height) + ((Ny-1) * Nx * mouseX/width))
+  var point = Math.floor(((Nx - 1) * mouseY / height) + ((Ny - 1) * Nx * mouseX / width))
   console.log(point);
   u1[point] += 0.0001;
 }
 
 function mouseDragged()
 {
-  var point = Math.floor(((Nx-1)*mouseY/height) + ((Ny-1) * Nx * mouseX/width))
+  var point = Math.floor(((Nx - 1) * mouseY / height) + ((Ny - 1) * Nx * mouseX / width))
 
   u1[point] += 0.00002;
 }
