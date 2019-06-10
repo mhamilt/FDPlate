@@ -50,10 +50,10 @@
         <div class="row">
           <div class="col-md-6 col-md-push-6">
             <div>
-              <input type="range" id="start" name="volume" style="width: 75%;"
-              min="0" max="10" step="0.1" oninput="zscl = this.value * 25000">
+              <input type="range" id="volume" class="slider" name="volume"
+              min="0" max="10" step="0.1" oninput="zscl = this.value * 2.5e4">
               <label for="volume">Volume</label>
-              <input type="range" id="start" name="speed" style="width: 75%;"
+              <input type="range" id="speed" class="slider" name="speed" style="width: 75%;"
               min="1" max="20" step="1" oninput="updatesPerFrame = this.value">
               <label for="volume">Speed</label>
             </div>
