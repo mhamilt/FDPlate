@@ -1,56 +1,76 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <!-- META -->
-    <meta charset="UTF-8">
-    <meta name="description" content="finite difference scheme">
-    <meta name="keywords" content="HTML,CSS,P5js,JavaScript,fdtd,finite difference">
-    <meta name="author" content="Matthew Hamilton">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FDPlate</title>
-    <!-- SCRIPT -->
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
-    <script src="js/fd-plate.js"></script>
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-  </head>
+<head>
+  <!-- META -->
+  <meta charset="UTF-8">
+  <meta name="description" content="finite difference scheme">
+  <meta name="keywords" content="HTML,CSS,P5js,JavaScript,fdtd,finite difference">
+  <meta name="author" content="Matthew Hamilton">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FDPlate</title>
+  <!-- SCRIPT -->
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
+  <script src="js/fd-plate.js"></script>
 
-  <body>
-    <nav class="navbar navbar-dark navbar-full bg-inverse" style="">
-      <a class="navbar-brand" href="#">FDPlate</a>
-      <ul class="nav navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="https://github.com/mhamilt/processing-tone-matrix">GitHub</a>
-        </li>
-      </ul>
-    </nav>
-    <div class="container">
-      <div id="jumbo-canvas" class="jumbotron">
-        <h1>
-          Finite Difference Plate
-        </h1>
-        <p class="lead">
-          A finite difference plate. See the GitHub repository for more info.
-        </p>
-        <h2>
-          Equation of Motion
-        </h2>
-        <p>
-          <span style="font-size:0.9em; line-height:0%">$$\ddot{u} = -\kappa^{2}\Delta\Delta u, \quad \kappa = \sqrt{\frac{E H^2}{12\rho(1- \nu)} }$$</span>
-        </p>
-        <hr />
-        <div id="sketch-holder" align="center">
-          <!-- Our sketch will go here! -->
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-dark navbar-full bg-inverse" style="">
+    <a class="navbar-brand" href="#">FDPlate</a>
+    <ul class="nav navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/mhamilt/processing-tone-matrix">GitHub</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="container">
+    <div id="jumbo-canvas" class="jumbotron">
+      <h1>
+        Finite Difference Plate
+      </h1>
+      <p class="lead">
+        A finite difference plate. See the GitHub repository for more info.
+      </p>
+      <h2>
+        Equation of Motion
+      </h2>
+      <p>
+        <span style="font-size:0.9em; line-height:0%">$$\ddot{u} = -\kappa^{2}\Delta\Delta u, \quad \kappa = \sqrt{\frac{E H^2}{12\rho(1- \nu)} }$$</span>
+      </p>
+      <hr />
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-push-6">
+            <div>
+              <input type="range" id="start" name="volume" style="width: 75%;"
+              min="0" max="10" step="0.1" oninput="zscl = this.value * 25000">
+              <label for="volume">Volume</label>
+              <input type="range" id="start" name="speed" style="width: 75%;"
+              min="1" max="20" step="1" oninput="updatesPerFrame = this.value">
+              <label for="volume">Speed</label>
+            </div>
+            <select name="cars">
+              <option value="opt1">opt1</option>
+              <option value="opt1">opt2</option>
+            </select>
+          </div>
+          <div class="col-md-6 col-md-pull-6">
+            <div id="sketch-holder"></div>
+          </div>
         </div>
-        <script src="js/sketch.js"></script>
       </div>
+
     </div>
-  </body>
+  </div>
+  <script src="js/sketch.js"></script>
+</body>
 
 </html>
